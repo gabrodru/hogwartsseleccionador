@@ -73,9 +73,9 @@ class ListadoCasaHogwarts : AppCompatActivity() {
     /**
      * Función que inserta en la tabla el listado de Alumnos de una casa
      */
-    fun insertarAlumnosTabla(tabla: TableLayout, alumnos: List<AlumnoHogwarts>){
+    fun insertarAlumnosTabla(tabla: TableLayout, alumnos: List<AlumnoHogwarts>?){
         // Recorremos el listado de alumnos y lo añadimos a la tabla
-        for(alumno in alumnos){
+        alumnos?.forEach { alumno ->
             insertarFilaTabla(alumno, tabla)
         }
     }
