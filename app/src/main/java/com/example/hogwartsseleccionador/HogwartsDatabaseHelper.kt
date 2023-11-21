@@ -249,6 +249,17 @@ class HogwartsDatabaseHelper(context: Context) :
         return null
     }
 
+    fun countAlumnos(): Int {
+        val db = this.readableDatabase
+        val countQuery = "SELECT COUNT(*) FROM alumnos"
+        val cursor = db.rawQuery(countQuery, null)
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+        db.close()
+        return count
+    }
+
     /**
      * Función para obtener el listado de alumnos de Hogwarts en formato String
      */
