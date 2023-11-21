@@ -240,8 +240,13 @@ class HogwartsDatabaseHelper(context: Context) :
      * Obtenemos el número de Alumnos según la casa de Hogwarts
      */
     fun getNumeroAlumnos(casa: String): Int {
-        // TODO Crear consulta que devuelva el número de alumnos de una casa
-        return 0
+        val db = this.readableDatabase
+        val selectQuery = "SELECT COUNT(*) FROM alumnos WHERE casa = ?"
+        val cursor = db.rawQuery(selectQuery, arrayOf(casa))
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+        return count
     }
 
     fun listaAlumnos(casa: String): List<AlumnoHogwarts>? {

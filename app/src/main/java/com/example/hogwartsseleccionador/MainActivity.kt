@@ -11,12 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val hogwartsDB = HogwartsDatabaseHelper(this)
-        val numAlumnos = hogwartsDB.countAlumnos()
-
-        val textViewNumAlumnos: TextView = findViewById(R.id.textViewNumAlumnos)
-        textViewNumAlumnos.text = numAlumnos.toString()
-
         // Cogemos el botón nuevo alumno y creamos el evento listener
         val btnNuevoAlumno: Button = findViewById(R.id.btnNuevoAlumno)
         btnNuevoAlumno.setOnClickListener {
