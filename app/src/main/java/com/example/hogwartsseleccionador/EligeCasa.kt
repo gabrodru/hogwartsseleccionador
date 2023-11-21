@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 class EligeCasa : AppCompatActivity() {
@@ -58,6 +59,12 @@ class EligeCasa : AppCompatActivity() {
             val intent = Intent(this, ListadoCasaHogwarts::class.java)
             intent.putExtra("casa", CasaHogwarts.CASA_RAVENCLAW)
             startActivity(intent)
+        }
+
+        val btnAtras: ImageButton = findViewById(R.id.btnAtras)
+        btnAtras.setOnClickListener {
+            // Finalizar la actividad
+            finish()
         }
 
     }
