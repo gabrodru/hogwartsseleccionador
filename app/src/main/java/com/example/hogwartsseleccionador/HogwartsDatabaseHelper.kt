@@ -250,8 +250,40 @@ class HogwartsDatabaseHelper(context: Context) :
     }
 
     fun listaAlumnos(casa: String): List<AlumnoHogwarts>? {
-        //TODO Crear List<AlumnoHowarts> (ojo quitar el ? del retorno una vez completado)
-        return null
+        val alumnosList = mutableListOf<AlumnoHogwarts>()
+        val db = this.readableDatabase
+        val selectQuery = "SELECT * FROM alumnos WHERE casa = ?"
+        val cursor = db.rawQuery(selectQuery, arrayOf(casa))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
+                val apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido"))
+                val familiaMaggle = cursor.getInt(cursor.getColumnIndexOrThrow("familiaMaggle")) > 0
+                val habilidad = cursor.getInt(cursor.getColumnIndexOrThrow("habilidad"))
+                val inteligencia = cursor.getInt(cursor.getColumnIndexOrThrow("inteligencia"))
+                val creatividad = cursor.getInt(cursor.getColumnIndexOrThrow("creatividad"))
+                val etica = cursor.getInt(cursor.getColumnIndexOrThrow("etica"))
+                val coraje = cursor.getInt(cursor.getColumnIndexOrThrow("coraje"))
+                val lealtad = cursor.getInt(cursor.getColumnIndexOrThrow("lealtad"))
+
+                val alumno = AlumnoHogwarts(
+                    nombre = nombre,
+                    familiaMaggle = familiaMaggle,
+                    casa = casa,
+                    apellido = apellido,
+                    habilidad = habilidad,
+                    inteligencia = inteligencia,
+                    creatividad = creatividad,
+                    etica = etica,
+                    coraje = coraje,
+                    lealtad = lealtad
+                )
+                alumnosList.add(alumno)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return alumnosList
     }
 
     fun countAlumnos(): Int {
