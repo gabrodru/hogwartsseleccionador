@@ -335,4 +335,21 @@ class HogwartsDatabaseHelper(context: Context) :
         }
         return listado
     }
+
+    fun deleteAllAlumnos() {
+        val db = writableDatabase
+        db.execSQL("DELETE FROM alumnos")
+        db.close()
+    }
+
+    fun hayAlumnos(): Boolean {
+        val db = this.readableDatabase
+        val countQuery = "SELECT COUNT(*) FROM alumnos"
+        val cursor = db.rawQuery(countQuery, null)
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+        db.close()
+        return count > 0
+    }
 }

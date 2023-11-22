@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +21,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Botón para acceder a los listados de Alumnos
-        val btnListadoAlumnos: Button = findViewById(R.id.btnListaAlumnos)
-        btnListadoAlumnos.setOnClickListener {
+        val btnListaAlumnos: Button = findViewById(R.id.btnListaAlumnos)
+        btnListaAlumnos.setOnClickListener {
+            val hogwartsDB = HogwartsDatabaseHelper(this)
+            if (!hogwartsDB.hayAlumnos()) {
+                Toast.makeText(this, "Primero debes meter un alumno", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val intent = Intent(this, EligeCasa::class.java)
             startActivity(intent)
         }
