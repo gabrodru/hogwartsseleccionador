@@ -32,5 +32,28 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, EligeCasa::class.java)
             startActivity(intent)
         }
+
+        // Botón para borrar los Alumnos
+        val btnBorrarAlumnos: Button = findViewById(R.id.btnBorrar)
+        btnBorrarAlumnos.setOnClickListener {
+            val dialogoBuilder = AlertDialog.Builder(this)
+            dialogoBuilder.setTitle("Confirmación")
+            dialogoBuilder.setMessage("¿Estás seguro de que quieres borrar todos los alumnos?")
+
+
+            dialogoBuilder.setPositiveButton("Borrar") { dialog, which ->
+                val hogwartsDB = HogwartsDatabaseHelper(this)
+                hogwartsDB.deleteAllAlumnos()
+                Toast.makeText(this, "Todos los alumnos han sido borrados", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+
+            dialogoBuilder.setNegativeButton("Cancelar") { dialog, which ->
+
+            }
+
+            dialogoBuilder.show()
+        }
     }
 }
