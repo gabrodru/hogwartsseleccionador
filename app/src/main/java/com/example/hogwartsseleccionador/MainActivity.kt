@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Botón para borrar los Alumnos
-        val btnBorrarAlumnos: Button = findViewById(R.id.btnBorrar)
+        val btnBorrarAlumnos: ImageView = findViewById(R.id.imageBorrar)
         btnBorrarAlumnos.setOnClickListener {
             val dialogoBuilder = AlertDialog.Builder(this)
             dialogoBuilder.setTitle("Confirmación")

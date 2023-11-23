@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 class EligeCasa : AppCompatActivity() {
@@ -65,6 +66,12 @@ class EligeCasa : AppCompatActivity() {
         btnAtras.setOnClickListener {
             // Finalizar la actividad
             finish()
+        }
+
+        val btnHome: ImageView = findViewById(R.id.imageHome)
+        btnHome.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
     }
