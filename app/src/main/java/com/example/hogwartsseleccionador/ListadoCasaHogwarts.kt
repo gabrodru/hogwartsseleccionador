@@ -13,10 +13,11 @@ import androidx.core.content.ContextCompat
 
 class ListadoCasaHogwarts : AppCompatActivity() {
 
-    private fun setEstiloCelda(textoCelda: TextView){
+    private fun setEstiloCelda(textoCelda: TextView, indiceFila: Int){
         textoCelda.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
         textoCelda.gravity = Gravity.CENTER
-        textoCelda.setBackgroundResource(R.color.white)
+        val colorDeFondo = if (indiceFila % 2 == 0) R.color.colorFila1 else R.color.colorFila2
+        textoCelda.setBackgroundResource(colorDeFondo)
     }
 
     /**
@@ -24,38 +25,38 @@ class ListadoCasaHogwarts : AppCompatActivity() {
      * @param alumno datos del objeto AlumnoHogwartas
      * @param tabla tabla del estilo TableLayout donde se añadirá la fila
      */
-    private fun insertarFilaTabla(alumno: AlumnoHogwarts, tabla: TableLayout) {
+    private fun insertarFilaTabla(alumno: AlumnoHogwarts, tabla: TableLayout, indiceFila: Int) {
         var fila: TableRow = TableRow(this)
         // Introducimos los datos de la fila con los datos del alumno
         fila.setBackgroundResource(R.drawable.celda_borde)
-
+        fila.setBackgroundResource(R.color.black)
         // Nombre y Apellidos del alumno
         var nombreApellidos: TextView = TextView(this)
         nombreApellidos.text = "${alumno.nombre} ${alumno.apellido}"
-        setEstiloCelda(nombreApellidos)
+        setEstiloCelda(nombreApellidos,indiceFila)
         // Si es Maggle
         var esMaggle: TextView = TextView(this)
         esMaggle.text = FuncionesApoyo.booleanToString(alumno.familiaMaggle)
-        setEstiloCelda(esMaggle)
+        setEstiloCelda(esMaggle,indiceFila)
         // Habilidad, Inteligencia, Creatividad, Etica, Coraje, Lealtad
         var habilidad: TextView = TextView(this)
         habilidad.text = alumno.listaAtributos[0].valor.toString()
-        setEstiloCelda(habilidad)
+        setEstiloCelda(habilidad,indiceFila)
         var inteligencia: TextView = TextView(this)
         inteligencia.text = alumno.listaAtributos[1].valor.toString()
-        setEstiloCelda(inteligencia)
+        setEstiloCelda(inteligencia,indiceFila)
         var creatividad: TextView = TextView(this)
         creatividad.text = alumno.listaAtributos[2].valor.toString()
-        setEstiloCelda(creatividad)
+        setEstiloCelda(creatividad,indiceFila)
         var etica: TextView = TextView(this)
         etica.text = alumno.listaAtributos[3].valor.toString()
-        setEstiloCelda(etica)
+        setEstiloCelda(etica,indiceFila)
         var coraje: TextView = TextView(this)
         coraje.text = alumno.listaAtributos[4].valor.toString()
-        setEstiloCelda(coraje)
+        setEstiloCelda(coraje,indiceFila)
         var lealtad: TextView = TextView(this)
         lealtad.text = alumno.listaAtributos[5].valor.toString()
-        setEstiloCelda(lealtad)
+        setEstiloCelda(lealtad,indiceFila)
 
         // Insertamos los datos en la fila
         fila.addView(nombreApellidos)
@@ -73,10 +74,9 @@ class ListadoCasaHogwarts : AppCompatActivity() {
     /**
      * Función que inserta en la tabla el listado de Alumnos de una casa
      */
-    fun insertarAlumnosTabla(tabla: TableLayout, alumnos: List<AlumnoHogwarts>?){
-        // Recorremos el listado de alumnos y lo añadimos a la tabla
-        alumnos?.forEach { alumno ->
-            insertarFilaTabla(alumno, tabla)
+    fun insertarAlumnosTabla(tabla: TableLayout, alumnos: List<AlumnoHogwarts>?) {
+        alumnos?.forEachIndexed { indice, alumno ->
+            insertarFilaTabla(alumno, tabla, indice)
         }
     }
 

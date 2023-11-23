@@ -11,4 +11,8 @@
     <color name="griffindorfBackground">#80D59F65</color>
     <color name="hufflepuffBackground">#80F4DC67</color>
     <color name="ravenclawBackground">#8065C4D5</color>
+    <color name="colorFila1">#FFEBEE</color> <!-- Color para una fila -->
+    <color name="colorFila2">#E1F5FE</color> <!-- Color para la otra fila -->
+    <color name="red">#FF0000</color>
+
 </resources>
